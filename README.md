@@ -10,7 +10,7 @@ This is a simple collection of SVG images defining a deck of playing cards (base
       -h, --help            show this help message and exit
       -i INPUTDIR           Input directory of SVGs
       -o OUTPUTDIR          Output directory of PNGs
-      -q, --quiet           No output
+      -v, --verbose         Verbose output
       -x, --nocrush         Don't optimize resulting PNGs
       -n, --dry-run         Show commands without running them
       -w WIDTH              PNG output width
@@ -34,6 +34,7 @@ To generate custom PNG images, you'll want the following tools:
    * svg2png: `brew install svg2png`
    * optipng: `brew install optipng`
    * advdef: `brew install advancecomp`
+   * montage: `brew install imagemagick`
 
  * Python 2.7 (generate-png.py uses argparse which is Python 2.7 only)
 
