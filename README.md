@@ -52,3 +52,6 @@ The original source images were released by [Byron Knoll][3] into the public dom
  [2]: http://en.wikipedia.org/wiki/WTFPL
  [3]: http://www.byronknoll.com/
  [4]: https://code.google.com/p/vector-playing-cards/
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/notpeter/vector-playing-cards/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
