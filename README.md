@@ -1,6 +1,6 @@
 # Vector Playing Cards 
 
-This is a simple collection of SVG images defining a deck of playing cards (based on [vector-playing-cards][4] and a script (svg2png.py) which will convert a folder of svg files into arbitrarily sized png files.
+This is a simple collection of SVG images defining a deck of playing cards (based on [vector-playing-cards][4]) and a script (svg2png.py) which will convert a folder of svg files into arbitrarily sized png files.
 
 ## Usage:
     svg2png.py [-h] -i INPUTDIR -o OUTPUTDIR [-q] [-x] [-n] -w WIDTH
@@ -21,7 +21,7 @@ This is a simple collection of SVG images defining a deck of playing cards (base
     
     `python svg2png.py -v -x -i cards-svg -o cards-png-300px -w 300`
 
-  * Normal: Create SVGs to 360px wide optimized PNGs suppressing all status output
+  * Normal: Create SVGs to 320px wide optimized PNGs suppressing all status output
 
   	`python svg2png.py -i cards-svg -o cards-png-320px -w 320`
 
@@ -38,7 +38,7 @@ To generate custom PNG images, you'll want the following tools:
  * Python 2.7 (generate-png.py uses argparse which is Python 2.7 only)
 
 ## Notes:
-Non optimized PNGs are approximately a third smaller.
+Non optimized PNGs are approximately a third larger.
 
 ##License
 
