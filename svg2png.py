@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 
+"""
+Copyright 2014 Peter Tripp
+Licensed under the MIT License: http://opensource.org/licenses/MIT
+"""
+
 import argparse
 import os
 import subprocess
@@ -42,9 +47,7 @@ if __name__=="__main__":
 
     for eachfile in cmd :
         for c in eachfile :
-            if (args.dry_run):
+            if (args.dry_run or args.verbose):
                 print ' '.join(c)
-            else :
-                if args.verbose : print ' '.join(c)
-                if (subprocess.call(c)) :
-                    raise EnvrionmentError
+            if not args.dry_run:
+                subprocess.call(c)
