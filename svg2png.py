@@ -50,7 +50,7 @@ if __name__=="__main__":
             svg = f.read()
         #resvg_py rejects unit suffixes (e.g. "pt") on the root width/height; viewBox keeps the aspect ratio
         for attr in ("width", "height"):
-            svg = re.sub(r'(<svg\b[^>]*?\s%s="[\d.]+)[a-z]+"' % attr, r'\1"', svg, count=1)
+            svg = re.sub(rf'(<svg\b[^>]*?\s{attr}="[\d.]+)[a-z]+"', r'\1"', svg, count=1)
         png = resvg_py.svg_to_bytes(svg_string=svg, width=args.width)
         with open(outfile, "wb") as f:
             f.write(bytes(png))
