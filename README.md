@@ -1,57 +1,75 @@
-# Vector Playing Cards 
+# Vector Playing Cards
 
-This is a simple collection of SVG images defining a deck of playing cards (based on [vector-playing-cards][4]) and a script (svg2png.py) which will convert a folder of svg files into arbitrarily sized png files.
+This is a collection of SVG images for a full deck of playing cards (based on [vector-playing-cards][1]) and a script, `svg2png.py`, that converts a folder of SVG files into PNG files of any width.
 
-## Usage:
-    svg2png.py [-h] -i INPUTDIR -o OUTPUTDIR [-q] [-x] [-n] -w WIDTH
+The `cards-svg` folder contains 54 cards: the 52 standard cards plus two jokers. Files are named by rank then suit, for example `AS.svg`, `10H.svg`, `KD.svg`, `Joker1.svg` and `Joker2.svg`.
 
-    Generate fixed width PNGs from SVGs    
-    optional arguments:
-      -h, --help            show this help message and exit
-      -i INPUTDIR           Input directory of SVGs
-      -o OUTPUTDIR          Output directory of PNGs
-      -v, --verbose         Verbose output
-      -x, --nocrush         Don't optimize resulting PNGs
-      -n, --dry-run         Show commands without running them
-      -w WIDTH              PNG output width
+## Prerequisites
 
-## Example use:
- 
-  * Simple: Convert SVGs to 300px wide uncompressed PNGs:
-    
-    `python svg2png.py -v -x -i cards-svg -o cards-png-300px -w 300`
+- **Python 3**
+- **resvg-py** (the SVG renderer, no system libraries needed):
+  ```shell
+  pip install resvg-py
+  ```
+- **optipng** (optional): if it is on your `PATH`, the script uses it to shrink the PNGs. If it's missing, the script prints a note and skips that step.
+  - Windows: `winget install optipng`, or download it from [optipng.sourceforge.net][2]
+  - macOS: `brew install optipng`
+  - Debian/Ubuntu: `sudo apt install optipng`
 
-  * Normal: Create SVGs to 320px wide optimized PNGs suppressing all status output
+## Usage
 
-  	`python svg2png.py -i cards-svg -o cards-png-320px -w 320`
+```
+usage: svg2png.py [-h] -i INPUTDIR -o OUTPUTDIR [-v] [-x] [-n] -w WIDTH
 
+Generate fixed width PNGs from SVGs
 
-## Prerequisites:
-To generate custom PNG images, you'll want the following tools:
+options:
+  -h, --help            show this help message and exit
+  -i, --inputdir INPUTDIR
+                        Input directory of SVGs
+  -o, --outputdir OUTPUTDIR
+                        Output directory of PNGs
+  -v, --verbose         Verbose output
+  -x, --nocrush         Don't optimize resulting PNGs
+  -n, --dry-run         Show what would be done without doing it
+  -w, --width WIDTH     PNG output width
+```
 
- * MacOSX:
-   * Homebrew: `ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"`
-   * svg2png: `brew install svg2png`
-   * optipng: `brew install optipng`
-   * advdef: `brew install advancecomp`
-   * montage: `brew install imagemagick`
+The output directory is created if it doesn't exist. Existing PNGs with the same names are overwritten.
 
- * Python 2.7 (generate-png.py uses argparse which is Python 2.7 only)
+## Examples
 
-## Notes:
-Non optimized PNGs are approximately a third larger.
+- Convert to 300px wide PNGs without optimization, listing each file as it goes:
+  ```
+  python svg2png.py -v -x -i cards-svg -o cards-png-300px -w 300
+  ```
+- Convert to 691px wide PNGs, optimized with optipng if it's installed:
+  ```
+  python svg2png.py -i cards-svg -o cards-png-691px -w 691
+  ```
+- Show what would be generated without writing anything:
+  ```
+  python svg2png.py -n -i cards-svg -o cards-png-320px -w 320
+  ```
 
-##License
+## Card size and proportions
 
-These images, scripts and subsequent transformational output (e.g. custom sized PNGs) are released into the public domain or optionally licensed under the [WTFPL][2] in juristictions where the public domain is not a recognized legal concept.  Either way, do as you see fit: relicense, embed in commercial, non-commercial or open-source software, etc.
+You choose only the width. The height follows from the card artwork, whose proportions are about 1 : 1.452 (each SVG's `viewBox` is 167.09 × 242.67). For example, 691px wide gives 691 × 1006.
 
-The original source images were released by [Byron Knoll][3] into the public domain on Google Code as [vector-playing-cards][4] . Perhaps send him 
+To get a particular height, divide it by 1.452 to find the width. For example, `-w 688` gives cards about 1000px tall. For comparison, a standard poker card is 1 : 1.4 and a bridge card is about 1 : 1.556.
 
+## Notes
 
- [1]: https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
- [2]: http://en.wikipedia.org/wiki/WTFPL
- [3]: http://www.byronknoll.com/
- [4]: https://code.google.com/p/vector-playing-cards/
+- Unoptimized PNGs are roughly a third larger than ones run through optipng.
+- The SVGs give their size in `pt` units, which resvg-py rejects. The script removes the unit before rendering, which doesn't change the output's proportions.
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/notpeter/vector-playing-cards/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+## License
 
+These images, scripts and their output (for example, custom-sized PNGs) are released into the public domain, or optionally licensed under the [WTFPL][3] in jurisdictions where the public domain is not a recognized legal concept. Either way, do as you see fit: relicense, or embed in commercial, non-commercial or open-source software.
+
+The original source images were released into the public domain by [Byron Knoll][4] on Google Code as [vector-playing-cards][1]. See [CONTRIBUTORS.md](CONTRIBUTORS.md) for everyone who has worked on this project.
+
+[1]: https://code.google.com/archive/p/vector-playing-cards/
+[2]: https://optipng.sourceforge.net/
+[3]: https://en.wikipedia.org/wiki/WTFPL
+[4]: http://www.byronknoll.com/
